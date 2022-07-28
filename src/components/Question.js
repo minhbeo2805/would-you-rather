@@ -21,10 +21,11 @@ class Question extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const {dispatch, question, authedUser} = this.props
+        const {dispatch, questions, authedUser, qid} = this.props
+        const question = questions[qid]
         const {answer} = this.state
 
-        dispatch(handleAnswerQuestion(authedUser, question.id, answer, question))
+        dispatch(handleAnswerQuestion(authedUser, qid, answer, question))
         this.setState({
             answer: '',
             toResult: true,
@@ -32,7 +33,14 @@ class Question extends Component {
     }
 
     render() {
-        const {question, author, qid, authedUser} = this.props
+        const {questions, users, authedUser, qid} = this.props
+
+        const question = questions[qid]
+        if(!question){
+            return <Navigate to={'/404'}/>
+        }
+
+        const author = users[question.author]
         const {answer, toResult} = this.state
         const isOneChecked = question.optionOne.votes.includes(authedUser);
         const isTwoChecked = question.optionTwo.votes.includes(authedUser);
@@ -79,12 +87,10 @@ class Question extends Component {
 }
 
 function mapStateToProps({authedUser, users, questions}, {id}) {
-    const question = questions[id]
-    const author = users[question.author]
     return {
         authedUser,
-        question,
-        author,
+        questions,
+        users,
         qid: id
     }
 }

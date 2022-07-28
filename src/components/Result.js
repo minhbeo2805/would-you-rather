@@ -5,7 +5,15 @@ import {Navigate} from "react-router-dom";
 class Result extends Component {
 
     render() {
-        const {question, author, authedUser, qid} = this.props
+        const {questions, users, authedUser, qid} = this.props
+
+        const question = questions[qid]
+        if(!question){
+            return <Navigate to={'/404'}/>
+        }
+
+        const author = users[question.author]
+
         const optionOneVoteCount = question.optionOne.votes.length
         const optionTwoVoteCount = question.optionTwo.votes.length
         const sumVote = optionOneVoteCount + optionTwoVoteCount
@@ -49,12 +57,10 @@ class Result extends Component {
 }
 
 function mapStateToProps({authedUser, users, questions}, {id}) {
-    const question = questions[id]
-    const author = users[question.author]
     return {
         authedUser,
-        question,
-        author,
+        questions,
+        users,
         qid: id
     }
 }

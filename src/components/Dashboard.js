@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import QuestionOverview from "./QuestionOverview";
-import {Navigate} from "react-router-dom";
 
 class Dashboard extends Component {
     state = {

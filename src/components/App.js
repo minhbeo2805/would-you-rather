@@ -10,8 +10,7 @@ import NewQuestion from "./NewQuestion";
 import Nav from "./Nav";
 import Result from "./Result";
 import SignIn from "./SignIn";
-import {setAuthedUser} from "../actions/authedUser";
-import users from "../reducers/users";
+import Error from "./Error";
 
 class App extends Component {
 
@@ -46,6 +45,7 @@ class App extends Component {
                             <Nav/>
                             <Routes>
                                 <Route path='/signin' element={<SignIn/>}/>
+                                <Route path='/404' element={<Error/>}/>
                                 <Fragment>
                                     <Route path='/' exact={'true'} element={<Dashboard/>}/>
                                     <Route path='/questions/:id' element={<QuestionWrapper/>}/>
