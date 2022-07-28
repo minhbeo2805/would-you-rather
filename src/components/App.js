@@ -35,7 +35,6 @@ class App extends Component {
         const isReady = Object.keys(users).length > 0 &&  Object.keys(questions).length > 0
 
         if(!authedUser){
-            // console.log('coin carrd')
             return <SignIn />
         }
         return (

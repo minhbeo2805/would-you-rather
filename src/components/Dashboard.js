@@ -54,7 +54,6 @@ function mapStateToProps({authedUser, questions}) {
     const answeredQuestions = [];
     const unansweredQuestions = [];
 
-    console.log('authedUser', authedUser)
     for (const [id, question] of Object.entries(questions)) {
         if (question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)) {
             answeredQuestions.push(question)
